@@ -1,0 +1,29 @@
+{
+  "name": "cegabackend",
+  "version": "1.0.0",
+  "description": "backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "prisma generate && NODE_OPTIONS=\"--require dotenv/config\" nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luismiguelgilbert/cegaBackend.git"
+  },
+  "author": "Bitt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luismiguelgilbert/cegaBackend/issues"
+  },
+  "homepage": "https://github.com/luismiguelgilbert/cegaBackend#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.19",
+    "prisma": "^4.3.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.3.1",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1"
+  }
+}
