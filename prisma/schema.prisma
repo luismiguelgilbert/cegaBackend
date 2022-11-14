@@ -13,7 +13,19 @@ datasource db {
 model sec_users {
   login_id    Int @id
   login       String
+  pswd        String
   name        String
   email       String
   active      String
+}
+
+model informe_equipo_imagenes {
+  informe_equipo_imagenes_id    Int @id @default(autoincrement())
+  informe_equipo                Int
+  cargar                        Bytes	@db.LongBlob
+  nombre_archivo                String
+  usuario_creacion              Int
+  fecha_creacion                DateTime @default(now())
+  usuario_modificacion          Int?
+  fecha_modificacion            DateTime @default(now())
 }

@@ -1,23 +1,21 @@
-require('dotenv').config();
-const express = require('express')
-const app = express();
-const bodyParser = require('body-parser')
-const port = process.env.APPLICATION_PORT || 3000;
-const { PrismaClient } = require('@prisma/client')
+import express from 'express'
+import bodyParser from 'body-parser'
+import userRouter from './routes/users.js'
+import orderRouter from './routes/orders.js'
 
-const prisma = new PrismaClient();
+const app = express();
+const port = process.env.APPLICATION_PORT || 3000;
+const baseApiRoute = '/api';
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.get('/', async (request, response) => {
-  try {
-    const allUsers = await prisma.sec_users.findMany();
-    response.json(allUsers);
-  } catch(err) {
-    console.log(`Error in route: "${request.url}" =>  ${err}}`);
-    response.status(500).send(err.message);
-  }
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
 })
+app.use(`${baseApiRoute}/users`, userRouter);
+app.use(`${baseApiRoute}/orders`, orderRouter);
 
 app.listen(port, () => {
   console.log(`Cega backend server running on port: ${port}`);
